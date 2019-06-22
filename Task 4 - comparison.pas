@@ -1,4 +1,4 @@
-program task_4;
+program comparison;
 var
     a, b, c, d: integer;
 begin
