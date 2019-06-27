@@ -50,7 +50,7 @@ begin
   for x := 1 to no_days do
 
     if x = 1 then
-        write(first_row(first_day, no_days), ' ', x, ' ')
+        write(first_row(first_day, no_days), ' ', x, '  ')
 
     else if (x = 30) and (first_day = 6) then
         writeln
@@ -68,7 +68,7 @@ begin
             writeln;
             line_break := line_break + 7;
         end;
-        write(' ', x, '   ');
+        write('  ', x, '  ');
     end
 
     else
@@ -85,3 +85,4 @@ begin
     writeln;
     readln;
 end.
+
