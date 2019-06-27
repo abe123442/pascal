@@ -46,7 +46,7 @@ begin
 
   ClrScr;
 
-  writeln('SUN MON TUE WED THU FRI SAT');
+  writeln('Sun Mon Tue Wed Thu Fri Sat');
 
     for x := 1 to month_days do
         if x = 1 then
