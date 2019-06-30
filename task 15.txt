@@ -1,0 +1,9 @@
+find primes up pto N
+
+For all numbers a: from 2 to sqrt(n)
+  IF a is unmarked THEN
+    a is prime
+    for all multiples of a (a < n)
+      markk multiples as composite
+
+All unmarked numbers are prime!

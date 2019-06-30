@@ -1,4 +1,4 @@
-program test;
+program calendar_year;
 uses math, sysutils, strutils, crt;
 const
   week_head: string = 'Sun Mon Tue Wed Thu Fri Sat';

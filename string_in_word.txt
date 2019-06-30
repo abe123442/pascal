@@ -1,0 +1,7 @@
+str in word
+
+for i:= 1 to length(str) - 1 do
+	match := true;
+	for j := 0 to length(str) - 1 do
+	    if str[j] <> word[i+j] then
+		match := false;
