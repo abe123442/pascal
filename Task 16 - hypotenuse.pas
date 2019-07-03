@@ -11,4 +11,4 @@ begin
   write('Enter the second value: ');
   readln(num2);
   writeln('The length of the hypotenuse is: ', (hypotenuse(num1, num2)):2:2);
-end.s
+end.
