@@ -5,7 +5,11 @@ const
 var
   year, month, no_days, first_day, line_break, x: integer;  //input variables and incremental variables
   month_days: array [1..12] of integer; //array of all the months which also contains the number of days for each month
+<<<<<<< HEAD
   date_string: string;  //the name of the month and the year printed just above the names of the days
+=======
+  month_name: string;
+>>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
 
 function is_leap_year(year:integer):integer;  //finds if leap year or not
 begin  //If it is a leap year, the variable returns 2. Otherwise, 1 is returned
@@ -18,13 +22,21 @@ begin  //If it is a leap year, the variable returns 2. Otherwise, 1 is returned
   else is_leap_year:=1;
 end;
 
+<<<<<<< HEAD
 function calendar_date(year, month: integer): TDateTime;  //converts user input year and month to dateformat
+=======
+function calendar_date(year, month: integer): TDateTime;  //converts user input integer to dateformat
+>>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
 begin
     DefaultFormatSettings.DateSeparator := '/';  //sets the format of DateSeperator to '/'
     calendar_date:=StrToDate('01'+ DefaultFormatSettings.DateSeparator + IntToStr(month) + DefaultFormatSettings.DateSeparator + IntToStr(year));  //assigns the result to a dateformat 
 end;
 
+<<<<<<< HEAD
 function first_day_month(year, month: integer): integer;  //finds the first week day of the month as a date type
+=======
+function first_day_month(year, month: integer): integer;  //finds the first week day of the month
+>>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
 var
   first_date: TDateTime;
 begin
@@ -49,7 +61,11 @@ begin
 end;
 
 function first_calendar_row(first_day_month:integer):string;
+<<<<<<< HEAD
 var output_string: string;  //outputs the first set of spaces and/or dates for the first row with a first_day_month function call and DupeString
+=======
+var output_string: string;  //outputs the first set of spaces and/or dates for the first row with DupeString
+>>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
 begin  //sets the amount of spaces on the first row depending on the first day of the month
   if first_day_month = 1 then
     output_string := ' '
@@ -61,7 +77,11 @@ begin  //sets the amount of spaces on the first row depending on the first day o
     output_string := DupeString(' ', 13)
   else if first_day_month = 5 then
     output_string := DupeString(' ', 17)
+<<<<<<< HEAD
   //the remaining else-if statements output the wraparound (when number of days is 30 and the first day is 7 and also when number of days is 31 and the first day is either 6 or 7) part in the beginning
+=======
+  //the remaining else-if statements output the wraparound part in the beginning
+>>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
   else if first_day_month = 6 then  
     begin
       if no_days = 31 then
@@ -91,7 +111,11 @@ begin
     if (length(month_year) = 8) then
       center_date := DupeString(' ', width+1) + month_year + DupeString(' ', width)  //fixes centering for 8-lettered months
     else
+<<<<<<< HEAD
       center_date := DupeString(' ', width) + month_year + DupeString(' ', width)  
+=======
+      center_date := DupeString(' ', width) + month_year + DupeString(' ', width)
+>>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
   end
   else
     center_date := DupeString(' ', width+1) + month_year + DupeString(' ', width);
@@ -99,11 +123,19 @@ end;
 
 function print_calendar(year, month: integer): string;  //outputs the entire calendar
 begin
+<<<<<<< HEAD
   no_days := no_days_month(year, month);  //sets the total number of days by calling the no_days_month function
   first_day := first_day_month(year, month);  //sets the first day by calling the first_day_month function
   line_break := 9 - first_day;  //in this program, the first day is 1, so that is why it is 9 - first_day
   date_string := FormatDateTime('MMMM YYYY', calendar_date(year, month));  //using the function of calendar_date and formating it into the 'date_string' string
   writeln(center_date(date_string));
+=======
+  no_days := no_days_month(year, month);
+  first_day := first_day_month(year, month);
+  line_break := 9 - first_day;
+  month_name := FormatDateTime('MMMM YYYY', calendar_date(year, month));  //using the function of calendar_date and formating it into the month_name string
+  writeln(center_date(month_name));
+>>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
   writeln(week_str); //outputs the names of the days of the week
   for x := 1 to no_days do  //this loop cycles through all the month days and prints them out in the calendar
   begin
@@ -142,4 +174,8 @@ begin
   if year >= 1970 then
     print_calendar(year, month);  //calls the function with the user input values
   readln;
+<<<<<<< HEAD
 end.
+=======
+end.
+>>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
