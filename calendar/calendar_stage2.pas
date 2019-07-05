@@ -1,12 +1,12 @@
 program calendar_year;
 uses math, sysutils, strutils;  //allows the use of Floor, IntToStr, DupeString etc.
 const
-  week_str: string = 'Sun Mon Tue Wed Thu Fri Sat';  //the string just above the dates of the calendar
+  week_str: string = ' Sun Mon Tue Wed Thu Fri Sat';  //the string just above the dates of the calendar
 var
   year, month, no_days, first_day, line_break, x: integer;  //input variables and incremental variables
   month_days: array [1..12] of integer; //array of all the months which also contains the number of days for each month
   date_string: string;  //the name of the month and the year printed just above the names of the days
-  month_name: string;
+  month_name: string; //name of the month and year that is printed out
 
 function is_leap_year(year:integer):integer;  //finds if leap year or not
 begin  //If it is a leap year, the variable returns 2. Otherwise, 1 is returned
@@ -22,7 +22,7 @@ end;
 function calendar_date(year, month: integer): TDateTime;  //converts user input year and month to dateformat
 begin
     DefaultFormatSettings.DateSeparator := '/';  //sets the format of DateSeperator to '/'
-    calendar_date:=StrToDate('01'+ DefaultFormatSettings.DateSeparator + IntToStr(month) + DefaultFormatSettings.DateSeparator + IntToStr(year));  //assigns the result to a dateformat 
+    calendar_date:=StrToDate('01'+ DefaultFormatSettings.DateSeparator + IntToStr(month) + DefaultFormatSettings.DateSeparator + IntToStr(year));  //assigns the result to a dateformat
 end;
 
 function first_day_month(year, month: integer): integer;  //finds the first week day of the month as a date type
@@ -34,12 +34,12 @@ begin
 end;
 
 function no_days_month(year, month: integer): integer;  //finds number of days of each month
-begin  
+begin
   case month of
     1,3,5,7,8,10,12: month_days[month] := 31;
     4,6,9,11: month_days[month] := 30;
     2:
-      begin  //sets the number of days for February 
+      begin  //sets the number of days for February
         if (is_leap_year(year)) = 2 then
           month_days[month] := 29
         else
@@ -53,32 +53,32 @@ function first_calendar_row(first_day_month:integer):string;
 var output_string: string;  //outputs the first set of spaces and/or dates for the first row with a first_day_month function call and DupeString
 begin  //sets the amount of spaces on the first row depending on the first day of the month
   if first_day_month = 1 then
-    output_string := ' '
+    output_string := DupeString(' ', 2)
   else if first_day_month = 2 then
-    output_string := DupeString(' ', 5)
+    output_string := DupeString(' ', 6)
   else if first_day_month = 3 then
-    output_string := DupeString(' ', 9)
+    output_string := DupeString(' ', 10)
   else if first_day_month = 4 then
-    output_string := DupeString(' ', 13)
+    output_string := DupeString(' ', 14)
   else if first_day_month = 5 then
-    output_string := DupeString(' ', 17)
+    output_string := DupeString(' ', 18)
   //the remaining else-if statements output the wraparound (when number of days is 30 and the first day is 7 and also when number of days is 31 and the first day is either 6 or 7) part in the beginning
-  //the remaining else-if statements output the wraparound part in the beginning
-  else if first_day_month = 6 then  
+
+  else if first_day_month = 6 then
     begin
       if no_days = 31 then
-        output_string :=  ' 31' + DupeString(' ', 18)
+        output_string :=  '  31' + DupeString(' ', 18)
       else
-        output_string :=  DupeString(' ', 21)
+        output_string :=  DupeString(' ', 22)
     end
   else if first_day_month = 7 then
     begin
       if no_days = 30 then
-        output_string := ' 30' + DupeString(' ', 22)
+        output_string := '  30 ' + DupeString(' ', 21)
       else if no_days = 31 then
-        output_string := ' 30  31' + DupeString(' ', 18)
+        output_string := '  30  31' + DupeString(' ', 18)
       else
-        output_string := DupeString(' ', 25);
+        output_string := DupeString(' ', 26);
     end;
   first_calendar_row := output_string;  //assigns the result to the 'output_string' variable
 end;
@@ -87,13 +87,13 @@ function center_date(month_year: string): string;  //centers the date above the 
 var
   width: integer;
 begin
-  width := floor((length(week_str) - length(month_year))/2) - 1;  //floor rounds down the value of the output 
-  if width mod 2 = 0 then  
+  width := floor((length(week_str) - length(month_year))/2)-1;  //floor rounds down the value of the output
+  if width mod 2 = 0 then
   begin
     if (length(month_year) = 8) then
       center_date := DupeString(' ', width+1) + month_year + DupeString(' ', width)  //fixes centering for 8-lettered months
     else
-      center_date := DupeString(' ', width) + month_year + DupeString(' ', width)  
+      center_date := ' '+DupeString(' ', width) + month_year + DupeString(' ', width)
   end
   else
     center_date := DupeString(' ', width+1) + month_year + DupeString(' ', width);
@@ -110,7 +110,7 @@ begin
   for x := 1 to no_days do  //this loop cycles through all the month days and prints them out in the calendar
   begin
     if x = 1 then  //first row output
-      write(first_calendar_row(first_day), ' ', x, ' ')  
+      write(first_calendar_row(first_day), x:2)
     else if (x = 30) and (first_day = 7) then  //line break for x = 30 and first day = 6
       writeln
     else if (x = 31) and (first_day = 6) then  //line break for x = 31 and first day = 5
@@ -124,7 +124,7 @@ begin
         writeln;
         line_break := line_break + 7;
       end;
-      write('  ', x, ' ');
+      write(x:4);
     end
     else  //goes to the next line after every seven days
     begin
@@ -133,7 +133,7 @@ begin
         writeln;
         line_break := line_break + 7;
       end;
-      write(' ', x, ' ');
+      write(x:4);
     end;
     print_calendar:= '';  //assigns the result of the function to an empty string
   end;
