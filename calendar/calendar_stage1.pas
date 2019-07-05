@@ -16,11 +16,8 @@ begin  //sets the amount of spaces on the first row depending on the first day o
     output_string := DupeString(' ', 13)
   else if first_day_month = 4 then
     output_string := DupeString(' ', 17)
-<<<<<<< HEAD
   //the remaining else-if statements output the wraparound (when number of days is 30 and the first day is 6 and also when number of days is 31 and the first day is either 5 or 6) part in the beginning
-=======
   //the remaining else-if statements output the wraparound part in the beginning
->>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
   else if first_day_month = 5 then
   begin
     if no_days = 31 then
@@ -44,11 +41,8 @@ function print_calendar(no_days, first_day_month: integer): string;  //outputs t
 begin
   line_break := 8 - first_day;  
   writeln('Sun Mon Tue Wed Thu Fri Sat');
-<<<<<<< HEAD
   for x := 1 to no_days do  //This loop cycles through all the month days and prints them out in the calendar. It has some if statements that are needed to make the calendar look like a calendar
-=======
-  for x := 1 to no_days do  //this loop cycles through all the month days and prints them out in the calendar
->>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
+  begin
     if x = 1 then
       write(first_calendar_row(first_day_month, no_days), ' ', x, ' ')  //first row output
     else if (x = 30) and (first_day_month = 6) then   //line break for x = 30 and first_day_month = 6
@@ -75,6 +69,7 @@ begin
       end;
       write(' ', x, ' ');
     end;
+  end;
   print_calendar:= '';  //assigns result of function to an empty string
 end;
 
@@ -82,8 +77,4 @@ begin
   readln(month_days, first_day);
   print_calendar(month_days, first_day);  //calls output function with the user input values
   readln;
-<<<<<<< HEAD
 end.
-=======
-end.
->>>>>>> d40e4bf4f2d42dd479f9ab6b00b01bddf2512925
